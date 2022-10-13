@@ -1,0 +1,23 @@
+body {
+  padding-top: 50px;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.btn-reset{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ta-editor{
+  width: 100%;
+}
+
+.btn-success{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
