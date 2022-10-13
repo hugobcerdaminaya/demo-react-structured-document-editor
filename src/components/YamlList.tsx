@@ -24,11 +24,7 @@ export function YamlList() {
             </thead>
             <tbody>
               {lists.map(list => (
-                  <tr>
-                    <th scope="row">{list.id}</th>
-                    <td>{list.title}</td>
-                    <td><YamlListItem /></td>
-                  </tr>
+                  <YamlListItem key={list.id} todoList={list}/>
               ))}
             </tbody>
         </table>      
