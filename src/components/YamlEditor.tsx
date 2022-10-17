@@ -1,9 +1,14 @@
 import * as React from "react";
+import { db } from "../models/db";
+import { useState } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
 
 export function YamlEditor() {
+  const [title, setTitle] = useState('');
+  
     return (
       <div>
-        <label className="form-label">Editor de contenido</label><br/>
+        <label className="form-label">Editor de contenido (al finalizar de ingresar el contenido presiona la tecla Enter)</label><br/>
             <textarea 
                 className="form-control ta-editor" 
                 rows={7} 
@@ -13,13 +18,18 @@ export function YamlEditor() {
                 name: string
                 email: string
                 password: string
-              ">
+              "
+              onChange={ev => setTitle(ev.target.value)}
+              onKeyUp={ev => {
+                if (ev.key === 'Enter') {
+                  db.todoLists.add({ title });
+                  setTitle('');
+                }
+              }}
+              >
+                
             </textarea>
-            <button type="submit" 
-                    id="btn-add-content" 
-                    className="btn btn-md btn-success btn-submit">
-                        Agregar contenido a la tabla
-            </button>  
+            
       </div>
     );
 }
