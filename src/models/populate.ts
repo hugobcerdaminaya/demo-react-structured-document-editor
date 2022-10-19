@@ -4,17 +4,19 @@ export async function populate() {
    await db.Markdowns.bulkAdd([
     {
       title: 
-        ` name: Pedro,
-          email: pedro@gmail.com,
-          password: "123456789"
-        `
+        ' ## este es un ejemplo con javascript \n'+
+        ' ```js \n'+
+        ' console.log("buscando un valor") \n'+
+        ' ```'
+        
     },
     {
       title: 
-        ` name: Daniela,
-          email: daniela@gmail.com,
-          password: qwerty
-        `
+      ' ## este es un ejemplo con php \n'+
+      ' ```php \n'+
+      ' $myArray = [] \n'+
+      ' $myValue = explode("-", $myArray) \n'+
+      ' ```'
     },
   ]);
 }
