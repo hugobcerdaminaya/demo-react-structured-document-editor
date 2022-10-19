@@ -1,37 +1,19 @@
 import { db } from "../models/db";
 import { useState } from 'react';
-import Ajv, {JSONSchemaType} from "ajv";
-import { YamlList } from '../components/YamlList';
-import { Error } from '../components/Error';
+import { List } from './List';
+import { Error } from './Error';
 
-export function YamlEditor() {
+export function Editor() {
   const [title, setTitle] = useState('');
   const [id, setId] = useState(0);
   const [action, setAction] = useState(true);
-  const ajv = new Ajv();
-  //AJV
-  interface MyData {
-    name: string
-    email: string
-    password: string
-  }
-  const schema: JSONSchemaType<MyData> = {
-    type: 'object',
-    properties:{
-      name: {type:'string'},
-      email: {type:'string'},
-      password: {type:'string'}
-    },
-    required: ["name","email",'password'],
-    additionalProperties: false
-  }
-
   const createDocument = () => {
+    
     if(action){
-      db.todoLists.add({ title });
+      db.Markdowns.add({ title });
       setTitle('');  
     }else{
-      db.todoLists.update(id,{
+      db.Markdowns.update(id,{
         title,
       });
       setId(0);
@@ -48,19 +30,17 @@ export function YamlEditor() {
                 autoComplete="off"
                 id="name"
                 value={title}
-                placeholder="Escribe un Schema válido, con la siguiente estructura:
-                name: string
-                email: string
-                password: string
+                placeholder="Escribe un Markdown válido
               "
               onChange={ev => setTitle(ev.target.value)}
               onKeyUp={ev => {
                 if (ev.key === 'Enter') {
+
                   if(action){
-                    db.todoLists.add({ title });
+                    db.Markdowns.add({ title });
                     setTitle('');  
                   }else{
-                    db.todoLists.update(id,{
+                    db.Markdowns.update(id,{
                       title,
                     });
                     setId(0);
@@ -71,9 +51,9 @@ export function YamlEditor() {
               }}
               >
             </textarea>
-            <button className="btn btn-success" onClick={() => createDocument()}>Guardar schema</button>
+            <button className="btn btn-success" onClick={() => createDocument()}>Guardar contenido</button>
             <Error />
-            <YamlList 
+            <List 
               recoveryTitle={ (title) => setTitle(title) }
               recoveryId={ (id) => setId(id) }
               recoveryAction={ (action) => setAction(action) }

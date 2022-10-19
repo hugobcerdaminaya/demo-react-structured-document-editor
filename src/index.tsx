@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { ResetDatabaseButton } from './components/ResetDatabaseButton';
-import { YamlEditor } from './components/YamlEditor';
+import { ResetIndexedDbBtn } from './components/ResetIndexedDbBtn';
+import { Editor } from './components/Editor';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
@@ -13,10 +13,9 @@ function App() {
     <div className="container">
       <div className="starter-template">
         <h1>App One con React</h1>
-        <YamlEditor />
+        <Editor />
         <hr/>
-        <h3>Resetear indexedDB</h3>
-        <ResetDatabaseButton />
+        <ResetIndexedDbBtn />
       </div>
     </div>
   );

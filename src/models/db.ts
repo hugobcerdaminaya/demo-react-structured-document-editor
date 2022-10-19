@@ -1,29 +1,29 @@
 import Dexie, { Table } from 'dexie';
 import { populate } from './populate';
-import { TodoList } from './TodoList';
+import { Markdown } from './Markdown';
 
-export class TodoDB extends Dexie {
-  todoLists!: Table<TodoList, number>;
+export class initDB extends Dexie {
+  Markdowns!: Table<Markdown, number>;
   constructor() {
-    super('TodoDB');
+    super('initDB');
     this.version(1).stores({
-      todoLists: '++id',
+      Markdowns: '++id',
     });
   }
 
-  deleteList(todoListId: number) {
-    return this.transaction('rw', this.todoLists, () => {
-      this.todoLists.delete(todoListId);
+  deleteMockup(MarkdownId: number) {
+    return this.transaction('rw', this.Markdowns, () => {
+      this.Markdowns.delete(MarkdownId);
     });
   }
 }
 
-export const db = new TodoDB();
+export const db = new initDB();
 
 db.on('populate', populate);
 
 export function resetDatabase() {
-  return db.transaction('rw', db.todoLists,  async () => {
+  return db.transaction('rw', db.Markdowns,  async () => {
     await Promise.all(db.tables.map(table => table.clear()));
     await populate();
   });

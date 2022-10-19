@@ -1,7 +1,7 @@
 import { db } from "./db";
 
 export async function populate() {
-  const id = await db.todoLists.bulkAdd([
+   await db.Markdowns.bulkAdd([
     {
       title: 
         ` name: Pedro,

@@ -1,7 +1,7 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import {FC, Fragment} from "react";
 import { db } from "../models/db";
-import { YamlListItem } from "./YamlListItem";
+
 
 interface Props {
   recoveryTitle: ( title: string ) => void;
@@ -9,7 +9,7 @@ interface Props {
   recoveryAction: ( action: boolean ) => void;
 }
 
-export const YamlList:FC<Props> = ({recoveryTitle, recoveryId, recoveryAction}) => {
+export const List:FC<Props> = ({recoveryTitle, recoveryId, recoveryAction}) => {
   
   const editDocument = (list: any) => {
     recoveryTitle(list.title);
@@ -17,12 +17,12 @@ export const YamlList:FC<Props> = ({recoveryTitle, recoveryId, recoveryAction}) 
     recoveryAction(false);
   }
 
-  const lists = useLiveQuery(() => db.todoLists.toArray());
+  const lists = useLiveQuery(() => db.Markdowns.toArray());
   if (!lists) return null;
     return (
       <div>
         <br/>
-        <h1>Mis documentos</h1>
+        <h1>Mis Markdowns</h1>
         <table className="table">
             <thead>
               <tr>
@@ -40,7 +40,7 @@ export const YamlList:FC<Props> = ({recoveryTitle, recoveryId, recoveryAction}) 
                   <td>
                     <div className="btn-group" role="group" aria-label="Acciones">
                       <button className="btn btn-primary" onClick={() => editDocument(list)} title="Editar documento">Editar</button>
-                      <button className="btn btn-dark" onClick={() => db.todoLists.delete(list.id)} title="Eliminar documento">Eliminar</button>
+                      <button className="btn btn-dark" onClick={() => db.Markdowns.delete(list.id)} title="Eliminar documento">Eliminar</button>
                   </div>
                   </td>
                 </tr>
